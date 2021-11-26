@@ -19,6 +19,7 @@
 
   --primary: var(--background);
   --primary-light: rgb(45, 51, 70);
+  --primary-lighter: #555968;
 
   --ai-yellow: rgba(220, 198, 0, 1);
   --ai-green: rgba(0, 220, 114, 1);

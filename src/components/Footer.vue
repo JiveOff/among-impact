@@ -17,6 +17,6 @@ footer {
 
 a {
   font-weight: 500;
-  color: var(--primary-light) !important;
+  color: var(--primary-lighter) !important;
 }
 </style>
