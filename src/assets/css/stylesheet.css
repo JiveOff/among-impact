@@ -14,15 +14,15 @@
 }
 
 :root {
-  --background: rgba(0, 10, 47, 1);
+  --background: rgb(28, 34, 55);
   --background-secondary: rgb(33, 41, 68);
 
   --primary: var(--background);
-  --primary-light: rgb(45, 51, 70);
-  --primary-lighter: #555968;
+  --primary-light: rgb(96, 98, 104);
+  --primary-lighter: #989db1;
 
-  --ai-yellow: rgba(220, 198, 0, 1);
-  --ai-green: rgba(0, 220, 114, 1);
+  --ai-yellow: rgb(231, 202, 88);
+  --ai-green: rgb(105, 224, 167);
 }
 
 body,
@@ -34,6 +34,14 @@ html {
   flex-direction: column;
   justify-content: center;
   align-content: center;
+}
+
+@media screen and (max-width: 1024px) {
+  body,
+  html {
+    justify-content: flex-start;
+    align-content: flex-start;
+  }
 }
 
 .ai-title {

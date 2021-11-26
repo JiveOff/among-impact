@@ -13,6 +13,8 @@ export default {};
 footer {
   text-align: center;
   color: var(--primary-light);
+  padding: 10px;
+  margin-bottom: 15px;
 }
 
 a {
