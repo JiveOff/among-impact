@@ -17,6 +17,7 @@
 <style scoped>
 .roles-col {
   flex: 1.5;
+  padding: 5rem;
 }
 
 .roles {
