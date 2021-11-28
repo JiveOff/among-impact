@@ -25,10 +25,13 @@ export default {
   font-size: 3em;
   font-family: "Amatic SC", cursive;
   line-height: 1;
+  margin-bottom: 1rem;
 }
 
 .role img {
   width: 64px;
   border-radius: 100%;
+  margin-bottom: 5px;
+  margin-top: 15px;
 }
 </style>
