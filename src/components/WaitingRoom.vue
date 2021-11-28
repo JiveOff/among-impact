@@ -11,7 +11,7 @@
           <div class="avatar">
             <transition name="fade" mode="out-in">
               <img
-                :src="`https://paimon.moe/images/characters/${player.profilePicture}.png`"
+                :src="`/img/avatars/${player.profilePicture}.png`"
                 :key="player.profilePicture"
                 alt="Profil"
               />
