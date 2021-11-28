@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="ai-subbox mb-5">
-      <div class="ai-subtitle ai-subnegative">Partie</div>
+      <div class="ai-subtitle ai-subnegative">
+        Joueurs ({{ gameData.roomData.player.length }}/4)
+      </div>
       <div class="players">
         <div
           v-for="player in gameData.roomData.players"
