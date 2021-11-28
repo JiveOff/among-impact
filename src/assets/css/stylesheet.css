@@ -133,6 +133,7 @@ html {
   max-width: 480px;
   width: 100%;
   border-radius: 20px;
+  color: #fff;
 }
 
 .ai-subbox {
@@ -144,6 +145,22 @@ html {
   max-width: 480px;
   width: 100%;
   border-radius: 20px;
+}
+
+.ai-center-mini {
+  display: flex;
+  justify-content: center;
+}
+
+.ai-mini {
+  width: 100px;
+  padding: 5px;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+}
+
+.ai-mini .ai-subtitle {
+  margin-top: 0;
 }
 
 .ai-strike {

@@ -51,7 +51,7 @@
     </div>
     <b-button
       v-if="gameData.playerData.id === gameData.roomData.host.id"
-      :disabled="gameData.roomData.players.length < 4"
+      :disabled="gameData.roomData.players.length > 4"
       class="ai-button ai-bg-green"
       @click="startRoom"
       >Démarrer la partie</b-button
