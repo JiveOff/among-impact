@@ -2,7 +2,7 @@
   <div>
     <div class="ai-subbox mb-5">
       <div class="ai-subtitle ai-subnegative">
-        Joueurs ({{ gameData.roomData.player.length }}/4)
+        Joueurs ({{ gameData.roomData.players.length }}/4)
       </div>
       <div class="players">
         <div
