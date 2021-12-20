@@ -157,7 +157,7 @@ export default {
       this.rolesVoting = this.roles.filter(
         (role) =>
           role.title !== this.gameData.playerData.role.title &&
-          this.playerVotes.findIndex((p) => p.role === role.title) === -1
+          this.playerVotes.findIndex((p) => p.role.title === role.title) === -1
       );
     },
     voteJoueur(player) {
