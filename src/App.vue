@@ -127,7 +127,7 @@ export default {
       this.gameData.playerData = player;
     },
     setRoles: function (roles) {
-      this.roles = roles;
+      this.roles = roles.sort((a, b) => a.id - b.id);
     },
     gameData: function ({ state, data }) {
       this.gameData.state = state;
