@@ -38,6 +38,15 @@
                 "
                 :gameData="gameData"
                 :roles="roles"
+                @endVoting="endVoting"
+              />
+              <ResultsRoom
+                v-if="
+                  gameData.state == 'IN_ROOM' &&
+                  gameData.roomData.state == 'ENDED'
+                "
+                :gameData="gameData"
+                @leaveRoom="leaveRoom"
               />
               <div v-if="gameData.state == 'LOADING'" class="ai-subbox">
                 <div class="ai-subtitle ai-subnegative">Chargement...</div>
@@ -67,6 +76,7 @@ import RoomBox from "./components/RoomBox.vue";
 import WaitingRoom from "./components/WaitingRoom.vue";
 import PlayingRoom from "./components/PlayingRoom.vue";
 import VotingRoom from "./components/VotingRoom.vue";
+import ResultsRoom from "./components/ResultsRoom.vue";
 import Role from "./components/Role.vue";
 
 import { ToastProgrammatic as Toast } from "buefy";
@@ -81,6 +91,7 @@ export default {
     WaitingRoom,
     PlayingRoom,
     VotingRoom,
+    ResultsRoom,
   },
   methods: {
     createRoom(obj) {
@@ -106,6 +117,9 @@ export default {
     },
     endRoom() {
       this.$socket.emit("endRoom");
+    },
+    endVoting() {
+      this.$socket.emit("endVoting");
     },
   },
   sockets: {

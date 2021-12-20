@@ -2,7 +2,6 @@
   <div class="modal-card" style="width: auto">
     <Box>
       <div class="ai-subtitle mt-0">Role de {{ player.name }}</div>
-      {{ roles }}
       <div class="roles">
         <div
           v-for="role in roles"
@@ -23,8 +22,10 @@
 <style scoped>
 .roles {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.2rem;
 }
 
 .role .role-title {
@@ -35,7 +36,9 @@
 .role {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.4rem;
+  width: 150px;
+  cursor: pointer;
 }
 </style>
 
@@ -48,8 +51,8 @@ export default {
   },
   methods: {
     votePlayer(role) {
-      this.$parent.close();
       this.$emit("votePlayer", { role, player: this.player });
+      this.$parent.close();
     },
   },
 };

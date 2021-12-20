@@ -1,0 +1,58 @@
+<template>
+  <div>
+    <div
+      v-for="(result, index) in gameData.roomData.results"
+      :key="result.id"
+      class="ai-subbox"
+    >
+      <div class="ai-subtitle ai-subnegative">
+        {{ index + 1 }}{{ index + 1 === 1 ? "ère" : "ème" }} place
+      </div>
+      <div class="player">
+        <div class="avatar">
+          <img
+            :src="`/img/avatars/${result.player.profilePicture}.png`"
+            alt="Profil"
+            class="ai-avatar"
+          />
+        </div>
+        <div class="details">
+          <span class="player-name" :style="`color: ${result.role.color}`">{{
+            result.player.name
+          }}</span>
+          <span class="player-role">{{ result.points }} points</span>
+        </div>
+        <img :src="`${result.role.image}`" class="ai-role-icon" alt="Profil" />
+      </div>
+    </div>
+    <b-button class="ai-button ai-bg-red" @click="leaveRoom"
+      >Quitter la partie</b-button
+    >
+  </div>
+</template>
+
+<style scoped>
+.ai-subbox {
+  margin-top: 2rem !important;
+}
+
+.player .ai-role-icon {
+  float: right;
+  width: 64px;
+  border-radius: 100%;
+}
+</style>
+
+<script>
+export default {
+  props: ["gameData"],
+  mounted() {
+    console.log(this.gameData);
+  },
+  methods: {
+    leaveRoom() {
+      this.$emit("leaveRoom");
+    },
+  },
+};
+</script>

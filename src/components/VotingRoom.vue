@@ -2,10 +2,11 @@
   <div>
     <div class="ai-center-mini">
       <div class="ai-subbox ai-mini">
-        <div class="ai-subtitle">00:00</div>
+        <div class="ai-subtitle">
+          0{{ Math.floor(timer / 60) }}:{{ timerFormatted }}
+        </div>
       </div>
     </div>
-    {{ playerVotes }}
     <div class="ai-subbox">
       <div class="ai-subtitle ai-subnegative">Phase de vote</div>
       <div class="players">
@@ -21,15 +22,50 @@
               :src="`/img/avatars/${player.profilePicture}.png`"
               :key="player.profilePicture"
               alt="Profil"
+              class="ai-avatar"
+            />
+            <img
+              v-if="playerVotes.findIndex((p) => p.player === player.id) > -1"
+              :src="`${
+                playerVotes.filter((p) => p.player === player.id)[0].role.image
+              }`"
+              :key="player.profilePicture"
+              class="ai-avatar-vote"
+              alt="Profil"
             />
           </div>
-          <span class="player-name">{{ player.name }}</span>
+          <div class="details">
+            <span
+              class="player-name"
+              :style="`color: ${
+                playerVotes.findIndex((p) => p.player === player.id) > -1
+                  ? playerVotes.filter((p) => p.player === player.id)[0].role
+                      .color
+                  : ''
+              }`"
+              >{{ player.name }}</span
+            >
+            <span
+              v-if="playerVotes.findIndex((p) => p.player === player.id) > -1"
+              class="player-role"
+              >Ton vote:
+              {{
+                playerVotes.filter((p) => p.player === player.id)[0].role.title
+              }}</span
+            >
+          </div>
           <a @click="voteJoueur(player)" class="tag is-danger"
             ><i class="fas fa-gavel"></i> <span class="ml-2">Voter</span></a
           >
         </div>
       </div>
     </div>
+    <b-button
+      v-if="gameData.playerData.id === gameData.roomData.host.id"
+      class="ai-button ai-bg-red"
+      @click="endVoting"
+      >Arrêter le vote</b-button
+    >
   </div>
 </template>
 
@@ -56,12 +92,31 @@
   gap: 1rem;
 }
 
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0;
+}
+
 .player .player-name {
   font-family: "Amatic SC", cursive;
   font-size: 2rem;
 }
 
-.player img {
+.player .player-role {
+  display: block;
+}
+
+.player .ai-avatar {
+  width: 64px;
+  border-radius: 100%;
+}
+
+.player .ai-avatar-vote {
+  position: absolute;
+  left: 0;
+  opacity: 0.4;
   width: 64px;
   border-radius: 100%;
 }
@@ -76,14 +131,35 @@ export default {
     return {
       rolesVoting: [],
       playerVotes: [],
+      timer: 5 * 60,
     };
   },
   mounted() {
-    this.rolesVoting = this.roles.filter(
-      (role) => role.title !== this.gameData.playerData.role.title
-    );
+    this.loadRolesVoting();
+    let timerInterval = setInterval(() => {
+      if (this.timer > 0) {
+        this.timer--;
+      } else {
+        clearInterval(timerInterval);
+      }
+    }, 1000);
+  },
+  computed: {
+    timerFormatted: function () {
+      return this.timer % 60 < 10 ? "0" + (this.timer % 60) : this.timer % 60;
+    },
   },
   methods: {
+    endVoting() {
+      this.$emit("endVoting");
+    },
+    loadRolesVoting() {
+      this.rolesVoting = this.roles.filter(
+        (role) =>
+          role.title !== this.gameData.playerData.role.title &&
+          this.playerVotes.findIndex((p) => p.role === role.title) === -1
+      );
+    },
     voteJoueur(player) {
       this.$buefy.modal.open({
         parent: this,
@@ -95,11 +171,20 @@ export default {
           player,
         },
         events: {
-          votePlayer: (role) => {
-            this.playerVotes.push({
-              player: player.id,
-              role,
-            });
+          votePlayer: (vote) => {
+            let v = this.playerVotes.findIndex(
+              (p) => p.player === vote.player.id
+            );
+            if (v > -1) {
+              this.playerVotes[v].role = vote.role;
+            } else {
+              this.playerVotes.push({
+                player: vote.player.id,
+                role: vote.role,
+              });
+            }
+            this.$socket.emit("sendVotes", this.playerVotes);
+            this.loadRolesVoting();
           },
         },
       });

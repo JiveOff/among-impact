@@ -1,7 +1,9 @@
 <template>
   <div class="role">
     <div><img :src="role.image" /></div>
-    <span class="role-title">{{ role.title }}</span>
+    <span class="role-title" :style="`color: ${role.color}`">{{
+      role.title
+    }}</span>
     <span class="role-description">{{ role.description }}</span>
   </div>
 </template>
@@ -29,7 +31,7 @@ export default {
 }
 
 .role img {
-  width: 64px;
+  width: 96px;
   border-radius: 100%;
   margin-bottom: 5px;
   margin-top: 15px;
