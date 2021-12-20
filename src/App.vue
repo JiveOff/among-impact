@@ -47,6 +47,7 @@
                 "
                 :gameData="gameData"
                 @leaveRoom="leaveRoom"
+                @restartRoom="restartRoom"
               />
               <div v-if="gameData.state == 'LOADING'" class="ai-subbox">
                 <div class="ai-subtitle ai-subnegative">Chargement...</div>
@@ -56,6 +57,28 @@
               </div>
             </transition>
           </Box>
+          <!-- <div style="margin-top: 2.5rem">
+              <Box>
+                <div class="ai-subtitle ai-subnegative">Streaming</div>
+                Tu souhaite afficher les joueurs et leur rôle pendant la partie
+                sur ton overlay OBS? Clique <b>ici</b>.<br />
+                <div class="ai-subbox mt-5">
+                  <div class="group">
+                    <input
+                      v-model="overlay_link"
+                      class="ai-input-green"
+                      type="text"
+                      minlength="5"
+                      required
+                      ref="overlay_link"
+                      @keydown.enter="overlayLink"
+                    />
+                    <span class="bar ai-input-green"></span>
+                    <label class="ai-input-green">Code Overlay</label>
+                  </div>
+                </div>
+              </Box>
+            </div> -->
         </div>
         <div class="column roles-col">
           <div class="ai-title mb-5 mt-0">Un jeu, 6 rôles.</div>
@@ -120,6 +143,9 @@ export default {
     },
     endVoting() {
       this.$socket.emit("endVoting");
+    },
+    restartRoom() {
+      this.$socket.emit("restartRoom");
     },
   },
   sockets: {

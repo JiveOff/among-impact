@@ -52,7 +52,7 @@ html {
   margin-bottom: 2rem;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1700px), screen and (max-height: 1000px) {
   body,
   html {
     justify-content: flex-start;
