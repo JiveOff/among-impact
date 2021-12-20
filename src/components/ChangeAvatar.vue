@@ -90,6 +90,8 @@ export default {
         "yanfei",
         "yoimiya",
         "zhongli",
+        "arataki_itto",
+        "gorou",
       ],
     };
   },
