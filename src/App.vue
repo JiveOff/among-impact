@@ -55,6 +55,12 @@
                 Si rien ne se passe, actualisez ou contactez
                 <b>JiveOff#0727</b> sur Discord.
               </div>
+              <div v-if="gameData.state == 'DISCONNECTED'" class="ai-subbox">
+                <div class="ai-subtitle ai-subnegative">
+                  Déconnecté du serveur
+                </div>
+                Vous avez été déconnecté du serveur Among Impact.
+              </div>
             </transition>
           </Box>
           <!-- <div style="margin-top: 2.5rem">
@@ -169,6 +175,13 @@ export default {
       Toast.open({
         message: message,
         type: "is-success",
+      });
+    },
+    disconnect: function () {
+      this.gameData.state = "DISCONNECTED";
+      Toast.open({
+        message: "Déconnecté du serveur.",
+        type: "is-danger",
       });
     },
   },
