@@ -21,6 +21,7 @@ export default {};
 <style scoped>
 .ai-discord {
   font-weight: 600;
+  letter-spacing: 1.3px;
 }
 
 .ai-center {
