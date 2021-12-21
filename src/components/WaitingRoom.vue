@@ -1,5 +1,10 @@
 <template>
   <div>
+    <div v-if="avatarPool.length === 0" class="ai-subbox ai-subbox-red mb-5">
+      <div class="ai-subtitle ai-subnegative">Attention!</div>
+      Vous n'avez aucun personnage dans votre poule. Cliquez
+      <span class="ai-link" @click="changePool">ici</span> pour en ajouter.
+    </div>
     <div class="ai-subbox mb-5">
       <div class="ai-subtitle ai-subnegative">
         Joueurs ({{ gameData.roomData.players.length }}/4)
@@ -21,9 +26,9 @@
             <a
               v-if="player.id == gameData.playerData.id"
               class="tag is-primary change-avatar"
-              @click="changeAvatar"
-              ><i class="fas fa-user"></i
-            ></a>
+              @click="changePool"
+              ><font-awesome-icon icon="user"
+            /></a>
           </div>
           <span class="player-name">{{ player.name }}</span>
           <span v-if="player.id == gameData.roomData.host.id" class="tag"
@@ -37,8 +42,8 @@
             href="javascript:void()"
             @click="kickPlayer(player.id)"
             class="kick-button"
-            ><i class="fas fa-times"></i
-          ></a>
+            ><font-awesome-icon icon="times"
+          /></a>
         </div>
       </div>
     </div>
@@ -46,16 +51,28 @@
       <div class="ai-subtitle ai-subnegative">Code d'invitation</div>
       <div class="ai-invite-code">
         <span class="ai-invite-link">https://among-impact.jiveoff.fr/</span
-        ><span>{{ gameData.roomData.inviteCode }}</span>
+        ><span class="ai-room-code" :class="{ 'ai-blur': floutageCode }">{{
+          gameData.roomData.inviteCode
+        }}</span>
+        <span class="ai-eye-code" @click="floutageCode = !floutageCode">
+          <font-awesome-icon :icon="floutageCode ? 'eye-slash' : 'eye'" />
+        </span>
       </div>
     </div>
-    <b-button
-      v-if="gameData.playerData.id === gameData.roomData.host.id"
-      :disabled="gameData.roomData.players.length < 4"
-      class="ai-button ai-bg-green"
-      @click="startRoom"
-      >Démarrer la partie</b-button
+    <b-tooltip
+      label="Il faut au minimum 4 joueurs pour démarrer la partie."
+      type="is-dark"
+      position="is-top"
+      :active="gameData.roomData.players.length < 4"
     >
+      <b-button
+        v-if="gameData.playerData.id === gameData.roomData.host.id"
+        :disabled="gameData.roomData.players.length < 4"
+        class="ai-button ai-bg-green"
+        @click="startRoom"
+        >Démarrer la partie</b-button
+      >
+    </b-tooltip>
     <b-button class="ai-button ai-bg-red" @click="leaveRoom"
       >Quitter la partie</b-button
     >
@@ -105,11 +122,19 @@
 </style>
 
 <script>
-import ChangeAvatarVue from "./ChangeAvatar.vue";
+import AvatarPoolVue from "./AvatarPool.vue";
 export default {
   props: ["gameData"],
   data() {
-    return {};
+    return {
+      floutageCode: false,
+      avatarPool: [],
+    };
+  },
+  mounted() {
+    let pool = localStorage.getItem("avatarPool");
+    if (pool.length > 0) this.avatarPool = pool.split(",");
+    this.$emit("avatarPoolChanged", { pool: this.avatarPool });
   },
   methods: {
     leaveRoom() {
@@ -121,15 +146,18 @@ export default {
     startRoom() {
       this.$emit("startRoom");
     },
-    changeAvatar() {
+    changePool() {
       this.$buefy.modal.open({
         parent: this,
-        component: ChangeAvatarVue,
+        component: AvatarPoolVue,
         hasModalCard: true,
         trapFocus: true,
+        props: {
+          avatarPool: this.avatarPool,
+        },
         events: {
-          changeAvatar: (avatar) => {
-            this.$emit("changeAvatar", { avatar });
+          avatarPoolChanged: () => {
+            this.$emit("avatarPoolChanged", { pool: this.avatarPool });
           },
         },
       });

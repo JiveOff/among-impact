@@ -55,7 +55,8 @@
             >
           </div>
           <a @click="voteJoueur(player)" class="tag is-danger"
-            ><i class="fas fa-gavel"></i> <span class="ml-2">Voter</span></a
+            ><font-awesome-icon icon="gavel" />
+            <span class="ml-2">Voter</span></a
           >
         </div>
       </div>

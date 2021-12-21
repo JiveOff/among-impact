@@ -1,13 +1,14 @@
 <template>
   <div class="modal-card" style="width: auto">
     <Box>
-      <div class="ai-subtitle mt-0">Changer d'avatar</div>
+      <div class="ai-subtitle mt-0">Changer la poule de personnages</div>
       <div class="avatars">
         <a
           class="avatar"
           v-for="avatar in avatars"
           :key="avatar.id"
-          @click="changeAvatar(avatar)"
+          :class="{ 'avatar-flou': !avatarPool.includes(avatar) }"
+          @click="togglePool(avatar)"
         >
           <img :src="`/img/avatars/${avatar}.png`" :alt="avatar" />
         </a>
@@ -17,9 +18,17 @@
 </template>
 
 <style>
+.avatar {
+  transition: filter 0.2s ease-in-out;
+}
+
 .avatar img {
   border-radius: 100%;
   width: 64px;
+}
+
+.avatar-flou {
+  filter: grayscale(100%);
 }
 
 .avatars {
@@ -37,11 +46,14 @@ export default {
   components: {
     Box,
   },
+  props: ["avatarPool"],
   methods: {
-    changeAvatar(avatar) {
-      this.$parent.close();
-      this.$emit("changeAvatar", avatar);
-      console.log(avatar);
+    togglePool(avatar) {
+      this.avatarPool.includes(avatar)
+        ? this.avatarPool.splice(this.avatarPool.indexOf(avatar), 1)
+        : this.avatarPool.push(avatar);
+      localStorage.setItem("avatarPool", this.avatarPool.join(","));
+      this.$emit("avatarPoolChanged");
     },
   },
   data() {

@@ -25,7 +25,6 @@
         <img :src="`${result.role.image}`" class="ai-role-icon" alt="Profil" />
       </div>
     </div>
-    <div style="text-align: center">Fermeture de la salle dans 1 minute.</div>
     <b-button
       v-if="gameData.playerData.id === gameData.roomData.host.id"
       class="ai-button ai-bg-green"
