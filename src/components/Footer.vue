@@ -7,7 +7,7 @@
         <img src="/img/discord.svg" />
         <div>
           <span class="ai-discord">Discord d'Akenouille</span><br />
-          Trouve des coéquippiers, poste tes suggestions et rapporte les bugs!
+          Trouve des coéquippiers, poste tes suggestions et rapporte les bugs !
         </div>
       </a>
     </div>
