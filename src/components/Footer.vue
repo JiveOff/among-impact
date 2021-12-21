@@ -1,7 +1,16 @@
 <template>
   <footer>
     Concept de <a href="https://twitch.tv/Akenouille">Akenouille</a>, développé
-    par <a href="https://github.com/JiveOff">JiveOff</a>.
+    par <a href="https://github.com/JiveOff">JiveOff</a>.<br />
+    <div class="ai-center">
+      <a href="https://discord.gg/Apb4hUJ" class="ai-subbox">
+        <img src="/img/discord.svg" />
+        <div>
+          <span class="ai-discord">Discord d'Akenouille</span><br />
+          Trouve des coéquippiers, poste tes suggestions et rapporte les bugs!
+        </div>
+      </a>
+    </div>
   </footer>
 </template>
 
@@ -10,6 +19,29 @@ export default {};
 </script>
 
 <style scoped>
+.ai-discord {
+  font-weight: 600;
+}
+
+.ai-center {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.ai-subbox {
+  text-align: left;
+  display: flex;
+  gap: 1rem;
+  font-weight: 100;
+  color: #fff !important;
+}
+
+.ai-subbox img {
+  width: 32px;
+  height: 32px;
+}
+
 footer {
   text-align: center;
   color: var(--primary-light);
