@@ -35,12 +35,9 @@ body,
 html {
   background-color: var(--background);
   font-family: "Red Hat Display", sans-serif;
-  display: flex;
   height: 100vh;
   flex-direction: column;
-  justify-content: center;
-  align-content: center;
-
+  padding-top: 1.5rem;
   transition: all 0.5s ease-in-out;
 }
 
@@ -53,15 +50,6 @@ html {
   margin-top: 1rem;
   line-height: 5rem;
   margin-bottom: 2rem;
-}
-
-@media screen and (max-width: 1700px), screen and (max-height: 1000px) {
-  body,
-  html {
-    justify-content: flex-start;
-    align-content: flex-start;
-    padding-top: 1rem;
-  }
 }
 
 .ai-subtitle {

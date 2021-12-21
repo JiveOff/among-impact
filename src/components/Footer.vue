@@ -1,7 +1,5 @@
 <template>
   <footer>
-    Concept de <a href="https://twitch.tv/Akenouille">Akenouille</a>, développé
-    par <a href="https://github.com/JiveOff">JiveOff</a>.<br />
     <div class="ai-center">
       <a href="https://discord.gg/Apb4hUJ" class="ai-subbox">
         <img src="/img/discord.svg" />
@@ -11,6 +9,8 @@
         </div>
       </a>
     </div>
+    Concept de <a href="https://twitch.tv/Akenouille">Akenouille</a>, développé
+    par <a href="https://github.com/JiveOff">JiveOff</a>.<br />
   </footer>
 </template>
 
@@ -27,7 +27,7 @@ export default {};
 .ai-center {
   display: flex;
   justify-content: center;
-  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .ai-subbox {
