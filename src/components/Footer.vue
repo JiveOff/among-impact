@@ -1,7 +1,7 @@
 <template>
   <footer>
     <div class="ai-center">
-      <a href="https://discord.gg/Apb4hUJ" class="ai-subbox">
+      <a href="https://discord.gg/mEerzctbEg" class="ai-subbox">
         <img src="/img/discord.svg" />
         <div>
           <span class="ai-discord">Discord d'Akenouille</span><br />
