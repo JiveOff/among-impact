@@ -66,7 +66,7 @@
           </Box>
         </div>
         <div class="column roles-col">
-          <div class="ai-title mb-5 mt-0">Un jeu, 6 rôles.</div>
+          <div class="ai-title mb-5 mt-0">4 joueurs, 6 rôles.</div>
           <div class="roles">
             <Role v-for="role in roles" :key="role.title" :role="role" />
           </div>
