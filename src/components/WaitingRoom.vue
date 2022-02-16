@@ -51,11 +51,11 @@
       <div class="ai-subtitle ai-subnegative">Code d'invitation</div>
       <div class="ai-invite-code">
         <span class="ai-invite-link">https://among-impact.jiveoff.fr/</span
-        ><span class="ai-room-code" :class="{ 'ai-blur': floutageCode }">{{
+        ><span class="ai-room-code" :class="{ 'ai-blur': hideCode }">{{
           gameData.roomData.inviteCode
         }}</span>
-        <span class="ai-eye-code" @click="floutageCode = !floutageCode">
-          <font-awesome-icon :icon="floutageCode ? 'eye-slash' : 'eye'" />
+        <span class="ai-eye-code" @click="$emit('toggleCode')">
+          <font-awesome-icon :icon="hideCode ? 'eye-slash' : 'eye'" />
         </span>
       </div>
     </div>
@@ -67,7 +67,6 @@
     >
       <b-button
         v-if="gameData.playerData.id === gameData.roomData.host.id"
-        :disabled="gameData.roomData.players.length < 4"
         class="ai-button ai-bg-green"
         @click="startRoom"
         >Démarrer la partie</b-button
@@ -124,10 +123,9 @@
 <script>
 import AvatarPoolVue from "./AvatarPool.vue";
 export default {
-  props: ["gameData"],
+  props: ["gameData", "hideCode"],
   data() {
     return {
-      floutageCode: false,
       avatarPool: [],
     };
   },

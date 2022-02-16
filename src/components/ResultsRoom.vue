@@ -53,7 +53,9 @@
 export default {
   props: ["gameData"],
   mounted() {
-    console.log(this.gameData);
+    let audio = new Audio("sounds/end.mp3");
+    audio.volume = 0.45;
+    audio.play();
   },
   methods: {
     leaveRoom() {

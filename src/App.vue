@@ -17,6 +17,8 @@
                   gameData.roomData.state == 'WAITING'
                 "
                 :gameData="gameData"
+                :hideCode="hideCode"
+                @toggleCode="toggleCode"
                 @leaveRoom="leaveRoom"
                 @kickPlayer="kickPlayer"
                 @startRoom="startRoom"
@@ -66,7 +68,7 @@
           </Box>
         </div>
         <div class="column roles-col">
-          <div class="ai-title mb-5 mt-0">Un jeu, 6 rôles.</div>
+          <div class="ai-title mb-5 mt-0">4 joueurs, 6 rôles.</div>
           <div class="roles">
             <Role v-for="role in roles" :key="role.title" :role="role" />
           </div>
@@ -135,6 +137,9 @@ export default {
     avatarPoolChanged(obj) {
       this.$socket.emit("avatarPoolChanged", obj.pool);
     },
+    toggleCode() {
+      this.hideCode = !this.hideCode;
+    },
   },
   sockets: {
     setPlayer: function (player) {
@@ -175,6 +180,8 @@ export default {
         roomData: {},
       },
       roles: [],
+
+      hideCode: false,
     };
   },
 };

@@ -65,8 +65,9 @@
       v-if="gameData.playerData.id === gameData.roomData.host.id"
       class="ai-button ai-bg-red"
       @click="endVoting"
-      >Arrêter le vote</b-button
     >
+      Mettre fin au vote
+    </b-button>
   </div>
 </template>
 
@@ -137,6 +138,9 @@ export default {
   },
   mounted() {
     this.loadRolesVoting();
+    let audio = new Audio("sounds/voting.mp3");
+    audio.volume = 0.45;
+    audio.play();
     let timerInterval = setInterval(() => {
       if (this.timer > 0) {
         this.timer--;
