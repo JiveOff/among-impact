@@ -17,6 +17,8 @@
                   gameData.roomData.state == 'WAITING'
                 "
                 :gameData="gameData"
+                :hideCode="hideCode"
+                @toggleCode="toggleCode"
                 @leaveRoom="leaveRoom"
                 @kickPlayer="kickPlayer"
                 @startRoom="startRoom"
@@ -135,6 +137,9 @@ export default {
     avatarPoolChanged(obj) {
       this.$socket.emit("avatarPoolChanged", obj.pool);
     },
+    toggleCode() {
+      this.hideCode = !this.hideCode;
+    },
   },
   sockets: {
     setPlayer: function (player) {
@@ -175,6 +180,8 @@ export default {
         roomData: {},
       },
       roles: [],
+
+      hideCode: false,
     };
   },
 };

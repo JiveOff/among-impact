@@ -104,6 +104,9 @@ export default {
         "zhongli",
         "arataki_itto",
         "gorou",
+        "shenhe",
+        "yun_jin",
+        "yae_miko",
       ],
     };
   },

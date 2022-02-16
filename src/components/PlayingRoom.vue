@@ -83,6 +83,7 @@
 </style>
 
 <script>
+import AnnonceCharVue from "./AnnonceChar.vue";
 import Role from "./Role.vue";
 export default {
   props: ["gameData"],
@@ -91,6 +92,17 @@ export default {
   },
   data() {
     return {};
+  },
+  mounted() {
+    this.$buefy.modal.open({
+      parent: this,
+      component: AnnonceCharVue,
+      hasModalCard: true,
+      trapFocus: true,
+      props: {
+        info: this.gameData.playerData,
+      },
+    });
   },
   methods: {
     startVoting() {
