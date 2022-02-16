@@ -60,13 +60,14 @@
       </div>
     </div>
     <b-tooltip
-      label="Il faut au minimum 4 joueurs pour démarrer la partie."
+      label="Il faut au minimum 3 joueurs pour démarrer la partie."
       type="is-dark"
       position="is-top"
       :active="gameData.roomData.players.length < 4"
     >
       <b-button
         v-if="gameData.playerData.id === gameData.roomData.host.id"
+        :disabled="gameData.roomData.players.length < 3"
         class="ai-button ai-bg-green"
         @click="startRoom"
         >Démarrer la partie</b-button
