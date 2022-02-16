@@ -9,8 +9,11 @@
         </div>
       </a>
     </div>
-    Concept de <a href="https://twitch.tv/Akenouille">Akenouille</a>, développé
-    par <a href="https://github.com/JiveOff">JiveOff</a>.<br />
+    <b>Among Impact</b> 0.2<br />Concept de
+    <a href="https://twitch.tv/Akenouille">Akenouille</a>, développé par
+    <a href="https://github.com/JiveOff">JiveOff</a>, icône de rôle par
+    Belidya.<br /><br />Une partie des dessins & effets sonores sont des marques
+    commerciales<br />et/ou déposées de <b>miHoYo</b> et de leurs associés.<br />
   </footer>
 </template>
 
@@ -51,6 +54,11 @@ footer {
 }
 
 a {
+  font-weight: 500;
+  color: var(--primary-lighter) !important;
+}
+
+b {
   font-weight: 500;
   color: var(--primary-lighter) !important;
 }
