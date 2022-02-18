@@ -22,12 +22,13 @@
           }}</span>
           <span class="player-role">{{ result.points }} points</span>
         </div>
-        <img
-          :src="`${result.role.image}`"
-          class="ai-role-icon"
-          alt="Profil"
-          style="flex: 1"
-        />
+        <div class="icon">
+          <img
+            :src="`${result.role.image}`"
+            class="ai-role-icon"
+            alt="Profil"
+          />
+        </div>
       </div>
     </div>
     <b-button
@@ -51,6 +52,10 @@
   float: right;
   width: 64px;
   border-radius: 100%;
+}
+
+.player .icon {
+  flex: 1;
 }
 </style>
 
