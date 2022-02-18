@@ -16,19 +16,13 @@
             class="ai-avatar"
           />
         </div>
-        <div class="details">
+        <div class="details" style="flex: 1">
           <span class="player-name" :style="`color: ${result.role.color}`">{{
             result.player.name
           }}</span>
           <span class="player-role">{{ result.points }} points</span>
         </div>
-        <div class="icon">
-          <img
-            :src="`${result.role.image}`"
-            class="ai-role-icon"
-            alt="Profil"
-          />
-        </div>
+        <img :src="`${result.role.image}`" class="ai-role-icon" alt="Profil" />
       </div>
     </div>
     <b-button
@@ -52,10 +46,6 @@
   float: right;
   width: 64px;
   border-radius: 100%;
-}
-
-.player .icon {
-  flex: 1;
 }
 </style>
 
