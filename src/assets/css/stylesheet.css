@@ -26,7 +26,7 @@
   --ai-red: rgb(224, 105, 105);
 
   --ai-dark-red: rgb(153, 62, 62);
-  --ai-dark-green: rgb(53, 66, 60);
+  --ai-dark-green: rgb(61, 155, 113);
 
   --ai-muted: rgb(255, 255, 255, 0.1);
 }
@@ -37,8 +37,15 @@ html {
   font-family: "Red Hat Display", sans-serif;
   height: 100vh;
   flex-direction: column;
-  padding-top: 1.5rem;
   transition: all 0.5s ease-in-out;
+}
+
+.is-danger {
+  background-color: var(--ai-dark-red) !important;
+}
+
+.is-success {
+  background-color: var(--ai-dark-green) !important;
 }
 
 .ai-title {
@@ -238,7 +245,7 @@ html {
 
 .roles {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-gap: 10px;
   grid-auto-rows: minmax(100px, auto);
 }

@@ -20,7 +20,9 @@
           <span class="player-name" :style="`color: ${result.role.color}`">{{
             result.player.name
           }}</span>
-          <span class="player-role">{{ result.points }} points</span>
+          <span class="player-role"
+            >{{ result.points }} point{{ result.points === 1 ? "" : "s" }}
+          </span>
         </div>
         <img :src="`${result.role.image}`" class="ai-role-icon" alt="Profil" />
       </div>

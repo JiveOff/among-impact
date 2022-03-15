@@ -60,6 +60,7 @@
       </div>
     </div>
     <b-tooltip
+      v-if="gameData.roomData.host.id === gameData.playerData.id"
       label="Il faut au minimum 3 joueurs pour démarrer la partie."
       type="is-dark"
       position="is-top"

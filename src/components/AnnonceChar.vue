@@ -1,39 +1,56 @@
 <template>
   <div class="modal-card" style="width: auto">
-    <Box>
-      <div class="ai-title ai-negative ai-debut">Début de la partie!</div>
-      <div class="infos">
-        <div class="perso">
-          <div class="ai-subtitle mt-0">Ton personnage</div>
-          <div class="avatar">
-            <img
-              :src="`/img/avatars/${info.profilePicture}.png`"
-              :alt="avatar"
-            /><span class="name">
-              {{
-                info.profilePicture
-                  .replace("_", " ")
-                  .split(" ")
-                  .map((word) => {
-                    return word[0].toUpperCase() + word.substring(1);
-                  })
-                  .join(" ")
-              }}
-            </span>
-          </div>
-        </div>
-        <div class="role">
-          <div class="ai-subtitle mt-0">Ton rôle</div>
-          <div class="role">
-            <Role :role="info.role" />
-          </div>
-        </div>
+    <transition name="fade" mode="out-in">
+      <div v-if="transitionRole" class="ai-transition-role">
+        <img :src="info.role.image" />
       </div>
-    </Box>
+      <Box v-if="!transitionRole">
+        <div class="ai-title ai-negative ai-debut">Début de la partie!</div>
+        <div class="infos">
+          <div class="perso">
+            <div class="ai-subtitle mt-0">Ton personnage</div>
+            <div class="avatar">
+              <img
+                :src="`/img/avatars/${info.profilePicture}.png`"
+                :alt="avatar"
+              /><span class="name">
+                {{
+                  info.profilePicture
+                    .replace("_", " ")
+                    .split(" ")
+                    .map((word) => {
+                      return word[0].toUpperCase() + word.substring(1);
+                    })
+                    .join(" ")
+                }}
+              </span>
+            </div>
+          </div>
+          <div class="role">
+            <div class="ai-subtitle mt-0">Ton rôle</div>
+            <div class="role">
+              <Role :role="info.role" />
+            </div>
+          </div>
+        </div>
+      </Box>
+    </transition>
   </div>
 </template>
 
 <style scoped>
+.ai-transition-role {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.ai-transition-role img {
+  width: 20em;
+}
+
 .modal-card {
   overflow: initial;
 }
@@ -86,10 +103,19 @@ export default {
     Role,
   },
   props: ["info"],
+  data() {
+    return {
+      transitionRole: true,
+    };
+  },
   mounted() {
     let audio = new Audio("sounds/start.mp3");
     audio.volume = 0.45;
     audio.play();
+
+    setTimeout(() => {
+      this.transitionRole = false;
+    }, 1500);
 
     setTimeout(() => {
       this.$parent.close();

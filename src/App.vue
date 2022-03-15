@@ -68,9 +68,15 @@
           </Box>
         </div>
         <div class="column roles-col">
-          <div class="ai-title mb-5 mt-0">6 rôles, 4 boss.</div>
+          <div class="ai-title mb-5 mt-0">10 rôles, 4 boss.</div>
           <div class="roles">
-            <Role v-for="role in roles" :key="role.title" :role="role" />
+            <role-list-item
+              v-for="role in roles"
+              :key="role.title"
+              :role="role"
+              :gameData="gameData"
+              @toggleRole="toggleRole(role)"
+            />
           </div>
         </div>
       </div>
@@ -87,7 +93,7 @@ import WaitingRoom from "./components/WaitingRoom.vue";
 import PlayingRoom from "./components/PlayingRoom.vue";
 import VotingRoom from "./components/VotingRoom.vue";
 import ResultsRoom from "./components/ResultsRoom.vue";
-import Role from "./components/Role.vue";
+import RoleListItem from "./components/RoleListItem.vue";
 
 import { ToastProgrammatic as Toast } from "buefy";
 
@@ -96,12 +102,12 @@ export default {
   components: {
     Box,
     RoomBox,
-    Role,
     Footer,
     WaitingRoom,
     PlayingRoom,
     VotingRoom,
     ResultsRoom,
+    RoleListItem,
   },
   methods: {
     createRoom(obj) {
@@ -136,6 +142,16 @@ export default {
     },
     avatarPoolChanged(obj) {
       this.$socket.emit("avatarPoolChanged", obj.pool);
+    },
+    toggleRole(role) {
+      console.log("Toggling role " + role);
+      if (this.disabledRoles.includes(role.id)) {
+        this.disabledRoles = this.disabledRoles.filter((r) => r !== role.id);
+      } else {
+        this.disabledRoles.push(role.id);
+      }
+      console.log("Disabled roles", this.disabledRoles);
+      this.$socket.emit("setDisabledRoles", this.disabledRoles);
     },
     toggleCode() {
       this.hideCode = !this.hideCode;
@@ -179,7 +195,9 @@ export default {
         playerData: {},
         roomData: {},
       },
+
       roles: [],
+      disabledRoles: [],
 
       hideCode: false,
     };
