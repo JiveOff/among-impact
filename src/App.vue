@@ -40,7 +40,11 @@
                   gameData.roomData.state == 'VOTING'
                 "
                 :gameData="gameData"
-                :roles="roles"
+                :roles="
+                  roles.filter(
+                    (role) => !gameData.roomData.disabledRoles.includes(role.id)
+                  )
+                "
                 @endVoting="endVoting"
               />
               <ResultsRoom
