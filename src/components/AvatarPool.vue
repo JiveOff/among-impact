@@ -107,6 +107,7 @@ export default {
         "shenhe",
         "yun_jin",
         "yae_miko",
+        "kamisato_ayato",
       ],
     };
   },
