@@ -72,7 +72,7 @@
           </Box>
         </div>
         <div class="column roles-col">
-          <div class="ai-title mb-5 mt-0">10 rôles, 4 boss.</div>
+          <div class="ai-title mb-5 mt-0">10 rôles, 5 boss.</div>
           <div class="roles">
             <role-list-item
               v-for="role in roles"
