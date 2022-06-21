@@ -108,6 +108,7 @@ export default {
         "yun_jin",
         "yae_miko",
         "kamisato_ayato",
+        "yelan",
       ],
     };
   },
