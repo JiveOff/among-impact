@@ -109,6 +109,13 @@ export default {
         "yae_miko",
         "kamisato_ayato",
         "yelan",
+        "shikanoin_heizou",
+        "tighnari",
+        "collei",
+        "dori",
+        "candace",
+        "cyno",
+        "nilou"
       ],
     };
   },
