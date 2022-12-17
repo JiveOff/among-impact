@@ -115,7 +115,11 @@ export default {
         "dori",
         "candace",
         "cyno",
-        "nilou"
+        "nilou",
+        "nahida",
+        "layla",
+        "wanderer",
+        "faruzan",
       ],
     };
   },
