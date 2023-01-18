@@ -1,5 +1,7 @@
 import Vue from "vue";
 import App from "./App.vue";
+
+import 'bulma/css/bulma.css';
 import Buefy from "buefy";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -20,7 +22,7 @@ Vue.use(Buefy);
 import VueSocketIO from "vue-socket.io";
 import io from "socket.io-client";
 
-const socket = io(process.env.VUE_APP_API_URL + "/game", {
+const socket = io(import.meta.env.VITE_API_URL + "/game", {
   reconnectionDelayMax: 10000,
   withCredentials: true,
   path: "/game/",
