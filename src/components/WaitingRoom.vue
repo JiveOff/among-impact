@@ -50,7 +50,7 @@
     <div class="ai-subbox mb-4">
       <div class="ai-subtitle ai-subnegative">Code d'invitation</div>
       <div class="ai-invite-code">
-        <span class="ai-invite-link">https://among-impact.jiveoff.fr/</span
+        <span class="ai-invite-link">https://among-impact.jiveoff.fr/#</span
         ><span class="ai-room-code" :class="{ 'ai-blur': hideCode }">{{
           gameData.roomData.inviteCode
         }}</span>
@@ -59,21 +59,13 @@
         </span>
       </div>
     </div>
-    <b-tooltip
-      v-if="gameData.roomData.host.id === gameData.playerData.id"
-      label="Il faut au minimum 3 joueurs pour démarrer la partie."
-      type="is-dark"
-      position="is-top"
-      :active="gameData.roomData.players.length < 4"
+    <b-button
+      v-if="gameData.playerData.id === gameData.roomData.host.id"
+      :disabled="gameData.roomData.players.length < 3"
+      class="ai-button ai-bg-green"
+      @click="startRoom"
+      >Démarrer la partie</b-button
     >
-      <b-button
-        v-if="gameData.playerData.id === gameData.roomData.host.id"
-        :disabled="gameData.roomData.players.length < 3"
-        class="ai-button ai-bg-green"
-        @click="startRoom"
-        >Démarrer la partie</b-button
-      >
-    </b-tooltip>
     <b-button class="ai-button ai-bg-red" @click="leaveRoom"
       >Quitter la partie</b-button
     >

@@ -76,7 +76,7 @@ export default {
     },
   },
   mounted() {
-    let join_code = window.location.pathname.slice(1);
+    let join_code = window.location.hash.slice(1);
     if (join_code) {
       this.$refs.join_pseudo.focus();
       this.join_code = join_code;
