@@ -117,7 +117,7 @@
 <script>
 import AvatarPoolVue from "./AvatarPool.vue";
 export default {
-  props: ["gameData", "hideCode"],
+  props: ["gameData", "hideCode", "avatars"],
   data() {
     return {
       avatarPool: [],
@@ -146,6 +146,7 @@ export default {
         trapFocus: true,
         props: {
           avatarPool: this.avatarPool,
+          avatars: this.avatars,
         },
         events: {
           avatarPoolChanged: () => {

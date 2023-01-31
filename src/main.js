@@ -4,6 +4,9 @@ import App from "./App.vue";
 import 'bulma/css/bulma.css';
 import Buefy from "buefy";
 
+import VueToast from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
+
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faEye,
@@ -17,6 +20,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import "./assets/scss/app.scss";
 import "./assets/css/stylesheet.css";
 
+Vue.use(VueToast);
 Vue.use(Buefy);
 
 import VueSocketIO from "vue-socket.io";

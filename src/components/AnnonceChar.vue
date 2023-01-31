@@ -29,7 +29,7 @@
           <div class="role">
             <div class="ai-subtitle mt-0">Ton rôle</div>
             <div class="role">
-              <Role :role="info.role" />
+              <Role :role="info.role" :showDesc="true" />
             </div>
           </div>
         </div>

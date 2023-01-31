@@ -1,16 +1,19 @@
 <template>
-  <div class="role">
+  <div class="role" :class="{ 'compact': !showDesc }">
     <div><img :src="role.image" /></div>
     <span class="role-title" :style="`color: ${role.color}`">{{
       role.title
     }}</span>
-    <span class="role-description">{{ role.description }}</span>
+    <span v-if="showDesc" class="role-description">{{ role.description }}</span>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["role"],
+  props: {
+    role: Object,
+    showDesc: Boolean,
+  },
 };
 </script>
 
@@ -21,6 +24,22 @@ export default {
   justify-content: center;
   text-align: center;
   color: white;
+}
+
+.role .compact {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.role .compact .role-title {
+  margin-bottom: 0;
+  font-size: 3em;
+}
+
+.role .compact img {
+  width: 48px;
 }
 
 .role-title {

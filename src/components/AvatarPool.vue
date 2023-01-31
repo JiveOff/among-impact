@@ -1,17 +1,35 @@
 <template>
-  <div class="modal-card" style="width: auto">
-    <Box>
-      <div class="ai-subtitle mt-0">Changer la poule de personnages</div>
+  <div
+    class="modal-card"
+    style="width: auto; height: auto; display: flex; align-items: center"
+  >
+    <div
+      class="ai-subbox ai-subbox-green mb-5"
+      style="width: 100%; max-width: 100%"
+    >
+      <div class="ai-subtitle ai-subnegative">Attention!</div>
+      Sélectionnez des personnages un minimum montés pour éviter les mauvaises surprises ! Jouez le jeu et soyez fair play !
+    </div>
+    <Box style="max-width: 80vw">
+      <div class="ai-subtitle mt-0">
+        <div style="font-size: 1.5rem; line-height: 10px; margin-top: 10px">
+          {{ avatarPool.length }} personnages
+        </div>
+        Poule de personnages
+      </div>
       <div class="avatars">
-        <a
-          class="avatar"
+        <div
+          class="avatar-box"
           v-for="avatar in avatars"
           :key="avatar.id"
           :class="{ 'avatar-flou': !avatarPool.includes(avatar) }"
           @click="togglePool(avatar)"
         >
           <img :src="`/img/avatars/${avatar}.png`" :alt="avatar" />
-        </a>
+          <div class="avatar-name">
+            {{ humanizeName(avatar) }}
+          </div>
+        </div>
       </div>
     </Box>
   </div>
@@ -22,21 +40,63 @@
   transition: filter 0.2s ease-in-out;
 }
 
-.avatar img {
+.avatar-box {
+  padding: 0.3rem 0.5rem;
+  background-color: #00000056;
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  cursor: pointer;
+
+  max-width: 100px;
+  text-align: center;
+
+  border: 2px solid var(--ai-green);
+}
+
+.avatar-box img {
+  width: 73px;
+  margin-top: 0.5rem;
+
+  padding: 5px;
+  background-color: #00000056;
   border-radius: 100%;
-  width: 64px;
+}
+
+.avatar-box img {
+  transition: filter 0.2s ease-in-out;
+}
+
+.avatar-flou img {
+  filter: grayscale(100%) blur(2px);
 }
 
 .avatar-flou {
-  filter: grayscale(100%);
+  border: 2px solid #00000056;
 }
 
 .avatars {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  grid-auto-rows: 1fr;
+  grid-auto-flow: dense;
+
   margin-top: 1rem;
-  gap: 0.2rem;
+  gap: 0.3rem;
+
+  overflow-y: scroll;
+  height: 60vh;
+}
+
+@media (max-width: 768px) {
+  .avatars {
+    height: 45vh;
+  }
 }
 </style>
 
@@ -46,7 +106,7 @@ export default {
   components: {
     Box,
   },
-  props: ["avatarPool"],
+  props: ["avatarPool", "avatars"],
   methods: {
     togglePool(avatar) {
       this.avatarPool.includes(avatar)
@@ -55,73 +115,12 @@ export default {
       localStorage.setItem("avatarPool", this.avatarPool.join(","));
       this.$emit("avatarPoolChanged");
     },
-  },
-  data() {
-    return {
-      avatars: [
-        "albedo",
-        "aloy",
-        "amber",
-        "barbara",
-        "beidou",
-        "bennett",
-        "chongyun",
-        "diluc",
-        "diona",
-        "eula",
-        "fischl",
-        "ganyu",
-        "hu_tao",
-        "jean",
-        "kaedehara_kazuha",
-        "kaeya",
-        "kamisato_ayaka",
-        "keqing",
-        "klee",
-        "kujou_sara",
-        "lisa",
-        "mona",
-        "ningguang",
-        "noelle",
-        "qiqi",
-        "raiden_shogun",
-        "razor",
-        "rosaria",
-        "sangonomiya_kokomi",
-        "sayu",
-        "sucrose",
-        "tartaglia",
-        "thoma",
-        "traveler_anemo",
-        "traveler_geo",
-        "venti",
-        "xiangling",
-        "xiao",
-        "xingqiu",
-        "xinyan",
-        "yanfei",
-        "yoimiya",
-        "zhongli",
-        "arataki_itto",
-        "gorou",
-        "shenhe",
-        "yun_jin",
-        "yae_miko",
-        "kamisato_ayato",
-        "yelan",
-        "shikanoin_heizou",
-        "tighnari",
-        "collei",
-        "dori",
-        "candace",
-        "cyno",
-        "nilou",
-        "nahida",
-        "layla",
-        "wanderer",
-        "faruzan",
-      ],
-    };
+    humanizeName(name) {
+      return name
+        .split("_")
+        .map((word) => word[0].toUpperCase() + word.slice(1))
+        .join(" ");
+    },
   },
 };
 </script>

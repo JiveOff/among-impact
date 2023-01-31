@@ -17,6 +17,7 @@
                   gameData.roomData.state == 'WAITING'
                 "
                 :gameData="gameData"
+                :avatars="avatars"
                 :hideCode="hideCode"
                 @toggleCode="toggleCode"
                 @leaveRoom="leaveRoom"
@@ -31,6 +32,7 @@
                 "
                 :gameData="gameData"
                 @startVoting="startVoting"
+                @rerollAvatars="rerollAvatars"
                 @changeAvatar="changeAvatar"
                 @endRoom="endRoom"
               />
@@ -99,8 +101,6 @@ import VotingRoom from "./components/VotingRoom.vue";
 import ResultsRoom from "./components/ResultsRoom.vue";
 import RoleListItem from "./components/RoleListItem.vue";
 
-import { ToastProgrammatic as Toast } from "buefy";
-
 export default {
   name: "Home",
   components: {
@@ -135,6 +135,9 @@ export default {
     startVoting() {
       this.$socket.emit("startVoting");
     },
+    rerollAvatars() {
+      this.$socket.emit("rerollAvatars");
+    },
     endRoom() {
       this.$socket.emit("endRoom");
     },
@@ -168,28 +171,22 @@ export default {
     setRoles: function (roles) {
       this.roles = roles.sort((a, b) => a.id - b.id);
     },
+    setAvatars: function (avatars) {
+      this.avatars = avatars;
+    },
     gameData: function ({ state, data }) {
       this.gameData.state = state;
       this.gameData.roomData = data;
     },
     error: function (error) {
-      Toast.open({
-        message: error,
-        type: "is-danger",
-      });
+      this.$toast.error(error);
     },
     success: function (message) {
-      Toast.open({
-        message: message,
-        type: "is-success",
-      });
+      this.$toast.success(message);
     },
     disconnect: function () {
       this.gameData.state = "DISCONNECTED";
-      Toast.open({
-        message: "Déconnecté du serveur.",
-        type: "is-danger",
-      });
+      this.$toast.error("Déconnecté du serveur.");
     },
   },
   data() {
@@ -201,6 +198,7 @@ export default {
       },
 
       roles: [],
+      avatars: [],
       disabledRoles: [],
 
       hideCode: false,
