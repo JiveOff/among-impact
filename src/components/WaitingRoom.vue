@@ -126,6 +126,11 @@ export default {
   mounted() {
     let pool = localStorage.getItem("avatarPool");
     if (pool.length > 0) this.avatarPool = pool.split(",");
+    
+    this.avatarPool = this.avatarPool.filter((avatar) =>
+      this.avatars.includes(avatar)
+    );
+
     this.$emit("avatarPoolChanged", { pool: this.avatarPool });
   },
   methods: {
