@@ -73,7 +73,7 @@
 }
 
 .avatar-flou img {
-  filter: grayscale(100%) blur(2px);
+  filter: grayscale(100%);
 }
 
 .avatar-flou {
