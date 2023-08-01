@@ -18,36 +18,43 @@
         :class="{
           'ai-role-opacity':
             gameData.state == 'IN_ROOM' &&
-            gameData.playerData.id !== gameData.roomData.host.id &&
             gameData.roomData.disabledRoles.includes(role.id),
         }"
       >
         <div class="ai-role-name">
-          <img :src="role.image" />
+          <img :src="role.image" class="ai-role-image" />
           <span class="ai-role-title" :style="`color: ${role.color}`">{{
             role.title
           }}</span>
           <div class="ai-role-gap"></div>
-          <transition name="fade" mode="out-in">
-            <div
-              v-if="
-                gameData.state == 'IN_ROOM' &&
-                gameData.roomData.state == 'WAITING' &&
-                gameData.playerData.id === gameData.roomData.host.id
-              "
+          <div
+            v-if="
+              gameData.state == 'IN_ROOM' &&
+              gameData.roomData.state == 'WAITING' &&
+              gameData.roomData.roleGamemode == 'CHAOS' &&
+              !gameData.roomData.disabledRoles.includes(role.id)
+            "
+          >
+            <a class="tag is-warning" @click="$emit('chooseRole')">Choisir</a>
+          </div>
+          <div
+            v-if="
+              gameData.state == 'IN_ROOM' &&
+              gameData.roomData.state == 'WAITING' &&
+              gameData.playerData.id === gameData.roomData.host.id
+            "
+          >
+            <a
+              v-if="gameData.roomData.disabledRoles.includes(role.id)"
+              class="tag is-success"
+              @click="$emit('toggleRole')"
             >
-              <a
-                v-if="gameData.roomData.disabledRoles.includes(role.id)"
-                class="tag is-success"
-                @click="$emit('toggleRole')"
-              >
-                Activer
-              </a>
-              <a v-else class="tag is-danger" @click="$emit('toggleRole')">
-                Désactiver
-              </a>
-            </div>
-          </transition>
+              Activer
+            </a>
+            <a v-else class="tag is-danger" @click="$emit('toggleRole')">
+              Désactiver
+            </a>
+          </div>
         </div>
         <span class="role-description">{{ role.description }}</span>
       </div>
@@ -66,7 +73,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .ai-role-box {
   padding-top: 1.5rem;
 }
@@ -104,11 +111,23 @@ export default {
   border-radius: 100%;
 }
 
-.ai-role {
-  transition: filter 0.5s;
+.ai-role-image,
+.ai-role-title,
+.role-description {
+  transition: filter 0.3s ease-in-out;
 }
 
 .ai-role-opacity {
-  filter: opacity(0.3) blur(4px);
+  .ai-role-image {
+    filter: opacity(0.3) blur(4px);
+  }
+
+  .ai-role-title {
+    filter: opacity(0.3) blur(4px);
+  }
+
+  .role-description {
+    filter: opacity(0.3) blur(4px);
+  }
 }
 </style>

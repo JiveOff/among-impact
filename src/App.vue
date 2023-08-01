@@ -1,5 +1,29 @@
 <template>
   <div id="app">
+    <div
+      v-if="
+        gameData.state !== 'WAITING' &&
+        gameData.roomData.roleGamemode == 'MIRROR'
+      "
+      class="ai-bar ai-subbox-red"
+    >
+      <b>Attention !</b> Le mode de jeu Miroir est activé. Il peut donc y avoir
+      des rôles en double lors du jeu, soyez attentifs !
+    </div>
+    <div
+      v-else-if="
+        gameData.state !== 'WAITING' &&
+        gameData.roomData.roleGamemode == 'CHAOS'
+      "
+      class="ai-bar ai-subbox-yellow"
+    >
+      <b>Il est l'heure du chaos...</b> Vous pouvez donc choisir votre rôle
+      parmi tous les rôles disponibles !
+    </div>
+    <div v-else class="ai-bar">
+      Version 0.4 - Ajout des modes de jeu <b>Miroir</b> et <b>Chaos</b>, bon
+      jeu !
+    </div>
     <div class="home section">
       <div class="columns is-desktop is-centered">
         <div class="column ai-center">
@@ -24,6 +48,7 @@
                 @kickPlayer="kickPlayer"
                 @startRoom="startRoom"
                 @avatarPoolChanged="avatarPoolChanged"
+                @changeMode="changeMode"
               />
               <PlayingRoom
                 v-if="
@@ -82,6 +107,7 @@
               :role="role"
               :gameData="gameData"
               @toggleRole="toggleRole(role)"
+              @chooseRole="chooseRole(role)"
             />
           </div>
         </div>
@@ -150,14 +176,18 @@ export default {
     avatarPoolChanged(obj) {
       this.$socket.emit("avatarPoolChanged", obj.pool);
     },
+    changeMode(mode) {
+      this.$socket.emit("changeMode", mode);
+    },
+    chooseRole(role) {
+      this.$socket.emit("chooseRole", role.id);
+    },
     toggleRole(role) {
-      console.log("Toggling role " + role);
       if (this.disabledRoles.includes(role.id)) {
         this.disabledRoles = this.disabledRoles.filter((r) => r !== role.id);
       } else {
         this.disabledRoles.push(role.id);
       }
-      console.log("Disabled roles", this.disabledRoles);
       this.$socket.emit("setDisabledRoles", this.disabledRoles);
     },
     toggleCode() {

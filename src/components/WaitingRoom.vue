@@ -59,12 +59,19 @@
         </span>
       </div>
     </div>
+
     <b-button
       v-if="gameData.playerData.id === gameData.roomData.host.id"
-      :disabled="gameData.roomData.players.length < 3"
+      :disabled="gameData.roomData.players.length < 0"
       class="ai-button ai-bg-green"
       @click="startRoom"
       >Démarrer la partie</b-button
+    >
+    <b-button
+      v-if="gameData.playerData.id === gameData.roomData.host.id"
+      class="ai-button ai-bg-yellow"
+      @click="personalizeRoom"
+      >Personnaliser la partie</b-button
     >
     <b-button class="ai-button ai-bg-red" @click="leaveRoom"
       >Quitter la partie</b-button
@@ -72,7 +79,7 @@
   </div>
 </template>
 
-<style>
+<style lang="scss">
 .avatar {
   width: 64px;
   height: 64px;
@@ -116,6 +123,8 @@
 
 <script>
 import AvatarPoolVue from "./AvatarPool.vue";
+import RoomSettingsVue from "./RoomSettings.vue";
+
 export default {
   props: ["gameData", "hideCode", "avatars"],
   data() {
@@ -126,7 +135,7 @@ export default {
   mounted() {
     let pool = localStorage.getItem("avatarPool");
     if (pool.length > 0) this.avatarPool = pool.split(",");
-    
+
     this.avatarPool = this.avatarPool.filter((avatar) =>
       this.avatars.includes(avatar)
     );
@@ -156,6 +165,22 @@ export default {
         events: {
           avatarPoolChanged: () => {
             this.$emit("avatarPoolChanged", { pool: this.avatarPool });
+          },
+        },
+      });
+    },
+    personalizeRoom() {
+      this.$buefy.modal.open({
+        parent: this,
+        component: RoomSettingsVue,
+        hasModalCard: true,
+        trapFocus: true,
+        props: {
+          gameData: this.gameData,
+        },
+        events: {
+          changeMode: (mode) => {
+            this.$emit("changeMode", { mode });
           },
         },
       });
