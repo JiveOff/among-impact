@@ -67,12 +67,12 @@
       @click="startRoom"
       >Démarrer la partie</b-button
     >
-    <b-button
+    <!-- <b-button
       v-if="gameData.playerData.id === gameData.roomData.host.id"
       class="ai-button ai-bg-yellow"
       @click="personalizeRoom"
       >Personnaliser la partie</b-button
-    >
+    > -->
     <b-button class="ai-button ai-bg-red" @click="leaveRoom"
       >Quitter la partie</b-button
     >

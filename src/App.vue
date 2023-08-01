@@ -21,8 +21,7 @@
       parmi tous les rôles disponibles !
     </div>
     <div v-else class="ai-bar">
-      Version 0.4 - Ajout des modes de jeu <b>Miroir</b> et <b>Chaos</b>, bon
-      jeu !
+      Version 0.3 - Ajout de Mika, Baizhu, Dehya, Kaveh & Kirara
     </div>
     <div class="home section">
       <div class="columns is-desktop is-centered">
