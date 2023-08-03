@@ -21,10 +21,14 @@
       donc possible de choisir son rôle !
     </div>
     <div v-else class="ai-bar">
-      Version 0.4 - Ajout des modes de jeux <b>Miroir</b> et <b>Chaos</b> et
+      Version 0.4 - Ajout des modes de jeu <b>Miroir</b> et <b>Chaos</b> et
       reconnexions automatiques.
     </div>
     <div class="home section">
+      <div class="help-btn" @click="openHelp">
+        <div class="icon">?</div>
+        <span class="text">Règles</span>
+      </div>
       <div class="columns is-desktop is-centered">
         <div class="column ai-center">
           <Box>
@@ -127,6 +131,7 @@ import PlayingRoom from "./components/PlayingRoom.vue";
 import VotingRoom from "./components/VotingRoom.vue";
 import ResultsRoom from "./components/ResultsRoom.vue";
 import RoleListItem from "./components/RoleListItem.vue";
+import HelpModalVue from "./components/HelpModal.vue";
 
 import { useMiscStore } from "./stores/misc";
 
@@ -196,6 +201,14 @@ export default {
     },
     toggleCode() {
       this.hideCode = !this.hideCode;
+    },
+    openHelp: function () {
+      this.$buefy.modal.open({
+        parent: this,
+        component: HelpModalVue,
+        hasModalCard: true,
+        trapFocus: true,
+      });
     },
   },
   sockets: {

@@ -461,3 +461,51 @@ input:focus ~ .bar:before,
 input:focus ~ .bar:after {
   width: 50%;
 }
+
+.ai-flagged {
+  opacity: 0.2;
+}
+
+.help-btn {
+  position: absolute;
+  right: 0;
+  top: 2.75rem;
+  margin-top: 10px;
+  margin-right: 10px;
+  color: #fff;
+  cursor: pointer;
+
+  font-size: 1.5rem;
+  font-weight: 500;
+
+  line-height: 1.5rem;
+  text-align: center;
+
+  background: #00000028;
+  padding: 5px;
+
+  border-radius: 20px;
+
+  height: 45px;
+  padding-left: 12px;
+
+  display: flex;
+  align-items: center;
+}
+
+.help-btn .icon {
+  width: 25px;
+  height: 25px;
+
+  background: #fff;
+  color: #000;
+
+  border-radius: 50%;
+  font-size: 1.2rem;
+}
+
+.help-btn .text {
+  font-size: 1rem;
+  font-weight: 200;
+  padding: 0 10px 0 10px;
+}

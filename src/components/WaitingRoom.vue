@@ -7,13 +7,16 @@
     </div>
     <div class="ai-subbox mb-5">
       <div class="ai-subtitle ai-subnegative">
-        Joueurs ({{ gameData.roomData.players.length }}/4)
+        Joueurs ({{
+          gameData.roomData.players.filter((p) => !p.flagged).length
+        }}/4)
       </div>
       <div class="players">
         <div
           v-for="player in gameData.roomData.players"
           :key="player.id"
           class="player"
+          :class="{ 'ai-flagged': player.flagged }"
         >
           <div class="avatar">
             <transition name="fade" mode="out-in">
