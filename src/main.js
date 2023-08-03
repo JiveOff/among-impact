@@ -1,11 +1,13 @@
 import Vue from "vue";
 import App from "./App.vue";
 
-import 'bulma/css/bulma.css';
+import "bulma/css/bulma.css";
 import Buefy from "buefy";
 
-import VueToast from 'vue-toast-notification';
-import 'vue-toast-notification/dist/theme-sugar.css';
+import { createPinia, PiniaVuePlugin } from "pinia";
+
+import VueToast from "vue-toast-notification";
+import "vue-toast-notification/dist/theme-sugar.css";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -29,6 +31,9 @@ import io from "socket.io-client";
 const socket = io(import.meta.env.VITE_API_URL + "/game", {
   reconnectionDelayMax: 10000,
   withCredentials: true,
+  auth: {
+    playerId: localStorage.getItem("playerId"),
+  },
   path: "/game/",
 });
 
@@ -42,8 +47,12 @@ Vue.use(
   })
 );
 
+const pinia = createPinia();
+Vue.use(PiniaVuePlugin);
+
 Vue.config.productionTip = false;
 
 new Vue({
   render: (h) => h(App),
+  pinia,
 }).$mount("#app");

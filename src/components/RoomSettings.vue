@@ -17,20 +17,32 @@
               Classique
             </div>
             <div
-              class="ai-gamemode"
+              class="ai-gamemode gm-mirror"
               :class="{ active: gameData.roomData.roleGamemode === 'MIRROR' }"
               @click="changeMode('MIRROR')"
             >
               Miroir
             </div>
             <div
-              class="ai-gamemode"
+              class="ai-gamemode gm-chaos"
               :class="{ active: gameData.roomData.roleGamemode === 'CHAOS' }"
               @click="changeMode('CHAOS')"
             >
               Chaos
             </div>
           </div>
+          <p v-if="gameData.roomData.roleGamemode === 'CLASSIC'" class="mt-2">
+            Les rôles sont distribués aléatoirement et chaque joueur a un rôle
+            différent.
+          </p>
+          <p v-if="gameData.roomData.roleGamemode === 'MIRROR'" class="mt-2">
+            Les rôles sont distribués aléatoirement mais plusieurs joueurs
+            peuvent avoir le même rôle.
+          </p>
+          <p v-if="gameData.roomData.roleGamemode === 'CHAOS'" class="mt-2">
+            Chaque joueur choisit son rôle avant de commencer. Plusieurs joueurs
+            peuvent donc avoir le même rôle.
+          </p>
         </div>
       </div>
     </Box>
@@ -79,6 +91,16 @@ export default {
     &.active {
       background-color: var(--ai-green);
       color: rgb(0, 0, 0);
+
+      &.gm-mirror {
+        background-color: var(--ai-dark-green) !important;
+        color: #fff;
+      }
+
+      &.gm-chaos {
+        background-color: var(--ai-dark-red) !important;
+        color: #fff;
+      }
     }
   }
 }
