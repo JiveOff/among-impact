@@ -160,8 +160,8 @@ export default {
     },
     loadRolesVoting() {
       if (
-        this.gameData.roleGamemode === "MIRROR" ||
-        this.gameData.roleGamemode === "CHAOS"
+        this.gameData.roomData.roleGamemode === "MIRROR" ||
+        this.gameData.roomData.roleGamemode === "CHAOS"
       ) {
         this.rolesVoting = this.roles.filter(
           (role) =>
