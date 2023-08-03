@@ -9,7 +9,7 @@
         Among Impact est un mode de jeu Genshin créé par
         <a href="https://twitch.tv/akenouille">Akenouille</a>. <br /><br />
         Le but du jeu est de combattre des boss hebdomadaires à 4, en
-        multijoueur.<br />Avant de commencer la partie, chaque joueur se fait
+        multijoueur.<br />Avant de commencer la partie, tous les joueurs se font
         distribuer un rôle aléatoire ainsi qu'un personnage aléatoire de leur
         box (qu'ils auront fournie au prélable, en indiquant de préférence
         uniquement les personnages montés).<br />Pendant la partie, chaque
