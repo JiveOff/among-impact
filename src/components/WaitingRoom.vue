@@ -97,7 +97,7 @@
       <b-button
         style="flex: 1"
         v-if="gameData.playerData.id === gameData.roomData.host.id"
-        :disabled="gameData.roomData.players.length < 0"
+        :disabled="gameData.roomData.players.length < 3"
         class="ai-button ai-bg-green"
         @click="startRoom"
         >Démarrer la partie</b-button
