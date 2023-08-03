@@ -163,11 +163,7 @@ export default {
         this.gameData.roomData.roleGamemode === "MIRROR" ||
         this.gameData.roomData.roleGamemode === "CHAOS"
       ) {
-        this.rolesVoting = this.roles.filter(
-          (role) =>
-            this.playerVotes.findIndex((p) => p.role.title === role.title) ===
-            -1
-        );
+        this.rolesVoting = [...this.roles];
       } else {
         this.rolesVoting = this.roles.filter(
           (role) =>
