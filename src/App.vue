@@ -103,7 +103,9 @@
           </Box>
         </div>
         <div class="column roles-col">
-          <div class="ai-title mb-5 margin-mobile">10 rôles, 5 boss.</div>
+          <div class="ai-title mb-5 margin-mobile">
+            Jouer votre rôle et gagnez la partie !
+          </div>
           <div class="roles">
             <role-list-item
               v-for="role in roles"
