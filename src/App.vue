@@ -5,25 +5,30 @@
         gameData.state !== 'WAITING' &&
         gameData.roomData.roleGamemode == 'MIRROR'
       "
-      class="ai-bar ai-subbox-red"
+      class="ai-bar ai-subbox-green"
     >
       <b>Attention !</b> Le mode de jeu Miroir est activé. Il peut donc y avoir
-      des rôles en double lors du jeu, soyez attentifs !
+      des rôles en double lors de la partie, soyez attentifs !
     </div>
     <div
       v-else-if="
         gameData.state !== 'WAITING' &&
         gameData.roomData.roleGamemode == 'CHAOS'
       "
-      class="ai-bar ai-subbox-yellow"
+      class="ai-bar ai-subbox-red"
     >
-      <b>Il est l'heure du chaos...</b> Vous pouvez donc choisir votre rôle
-      parmi tous les rôles disponibles !
+      <b>Il est l'heure du chaos...</b> Le mode de jeu Chaos est activé. Il est
+      donc possible de choisir son rôle !
     </div>
     <div v-else class="ai-bar">
-      Version 0.3 - Ajout de Mika, Baizhu, Dehya, Kaveh & Kirara
+      Version 0.4 - Ajout des modes de jeu <b>Miroir</b> et <b>Chaos</b> et
+      reconnexions automatiques.
     </div>
     <div class="home section">
+      <div class="help-btn" @click="openHelp">
+        <div class="icon">?</div>
+        <span class="text">Règles</span>
+      </div>
       <div class="columns is-desktop is-centered">
         <div class="column ai-center">
           <Box>
@@ -98,7 +103,9 @@
           </Box>
         </div>
         <div class="column roles-col">
-          <div class="ai-title mb-5 mt-0">10 rôles, 5 boss.</div>
+          <div class="ai-title mb-5 margin-mobile">
+            Jouez votre rôle et gagnez la partie !
+          </div>
           <div class="roles">
             <role-list-item
               v-for="role in roles"
@@ -107,6 +114,7 @@
               :gameData="gameData"
               @toggleRole="toggleRole(role)"
               @chooseRole="chooseRole(role)"
+              :chosen="chosenRole === role.id"
             />
           </div>
         </div>
@@ -125,6 +133,9 @@ import PlayingRoom from "./components/PlayingRoom.vue";
 import VotingRoom from "./components/VotingRoom.vue";
 import ResultsRoom from "./components/ResultsRoom.vue";
 import RoleListItem from "./components/RoleListItem.vue";
+import HelpModalVue from "./components/HelpModal.vue";
+
+import { useMiscStore } from "./stores/misc";
 
 export default {
   name: "Home",
@@ -180,6 +191,7 @@ export default {
     },
     chooseRole(role) {
       this.$socket.emit("chooseRole", role.id);
+      this.chosenRole = role.id;
     },
     toggleRole(role) {
       if (this.disabledRoles.includes(role.id)) {
@@ -192,10 +204,19 @@ export default {
     toggleCode() {
       this.hideCode = !this.hideCode;
     },
+    openHelp: function () {
+      this.$buefy.modal.open({
+        parent: this,
+        component: HelpModalVue,
+        hasModalCard: true,
+        trapFocus: true,
+      });
+    },
   },
   sockets: {
     setPlayer: function (player) {
       this.gameData.playerData = player;
+      localStorage.setItem("playerId", player.id);
     },
     setRoles: function (roles) {
       this.roles = roles.sort((a, b) => a.id - b.id);
@@ -206,6 +227,23 @@ export default {
     gameData: function ({ state, data }) {
       this.gameData.state = state;
       this.gameData.roomData = data;
+
+      if (this.gameData.roomData) {
+        if (this.gameData.roomData.roleGamemode === "MIRROR") {
+          useMiscStore().setMode("mirror");
+        } else if (this.gameData.roomData.roleGamemode === "CHAOS") {
+          useMiscStore().setMode("chaos");
+        } else {
+          useMiscStore().setMode("normal");
+        }
+      } else {
+        useMiscStore().setMode("normal");
+        setTimeout(() => {
+          if (this.gameData.state === "WAITING") {
+            localStorage.removeItem("playerId");
+          }
+        }, 1000);
+      }
     },
     error: function (error) {
       this.$toast.error(error);
@@ -230,6 +268,8 @@ export default {
       avatars: [],
       disabledRoles: [],
 
+      chosenRole: null,
+
       hideCode: false,
     };
   },
@@ -243,5 +283,11 @@ export default {
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .margin-mobile {
+    margin-top: 2rem;
+  }
 }
 </style>

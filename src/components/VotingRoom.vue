@@ -159,11 +159,19 @@ export default {
       this.$emit("endVoting");
     },
     loadRolesVoting() {
-      this.rolesVoting = this.roles.filter(
-        (role) =>
-          role.title !== this.gameData.playerData.role.title &&
-          this.playerVotes.findIndex((p) => p.role.title === role.title) === -1
-      );
+      if (
+        this.gameData.roomData.roleGamemode === "MIRROR" ||
+        this.gameData.roomData.roleGamemode === "CHAOS"
+      ) {
+        this.rolesVoting = [...this.roles];
+      } else {
+        this.rolesVoting = this.roles.filter(
+          (role) =>
+            role.title !== this.gameData.playerData.role.title &&
+            this.playerVotes.findIndex((p) => p.role.title === role.title) ===
+              -1
+        );
+      }
     },
     voteJoueur(player) {
       this.$buefy.modal.open({

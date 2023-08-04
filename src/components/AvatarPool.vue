@@ -4,11 +4,12 @@
     style="width: auto; height: auto; display: flex; align-items: center"
   >
     <div
-      class="ai-subbox ai-subbox-green mb-5"
+      class="ai-subbox ai-subbox-red mb-5"
       style="width: 100%; max-width: 100%"
     >
       <div class="ai-subtitle ai-subnegative">Attention!</div>
-      Sélectionnez des personnages un minimum montés pour éviter les mauvaises surprises ! Jouez le jeu et soyez fair play !
+      Sélectionnez des personnages un minimum montés pour éviter les mauvaises
+      surprises ! Jouez le jeu et soyez fair play !
     </div>
     <Box style="max-width: 80vw">
       <div class="ai-subtitle mt-0">

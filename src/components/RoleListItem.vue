@@ -35,7 +35,10 @@
               !gameData.roomData.disabledRoles.includes(role.id)
             "
           >
-            <a class="tag is-warning" @click="$emit('chooseRole')">Choisir</a>
+            <a v-if="chosen" class="tag is-success">Choisi</a>
+            <a v-else class="tag is-warning" @click="$emit('chooseRole')"
+              >Choisir</a
+            >
           </div>
           <div
             v-if="
@@ -66,7 +69,7 @@
 import Box from "./Box.vue";
 
 export default {
-  props: ["role", "gameData"],
+  props: ["role", "gameData", "chosen"],
   components: {
     Box,
   },
