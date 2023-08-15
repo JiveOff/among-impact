@@ -21,8 +21,8 @@
       donc possible de choisir son rôle !
     </div>
     <div v-else class="ai-bar">
-      Version 0.4 - Ajout des modes de jeu <b>Miroir</b> et <b>Chaos</b> et
-      reconnexions automatiques.
+      Version 0.5 - Ajout de Lyney, Lynette et Freminet - Modes de jeu
+      disponibles
     </div>
     <div class="home section">
       <div class="help-btn" @click="openHelp">
