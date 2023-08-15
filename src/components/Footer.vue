@@ -9,7 +9,7 @@
         </div>
       </a>
     </div>
-    <b>Among Impact</b> 0.4<br />Concept de
+    <b>Among Impact</b> 0.5<br />Concept de
     <a href="https://twitch.tv/Akenouille">Akenouille</a>, développé par
     <a href="https://github.com/JiveOff">JiveOff</a>, icônes de rôle par
     Belidya.<br /><br />Une partie des dessins & effets sonores sont des marques
