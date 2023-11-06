@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from "vite";
 import { createVuePlugin as vue } from "vite-plugin-vue2";
 import path from "path";
 
@@ -17,8 +17,8 @@ export default defineConfig({
     ],
   },
   publicDir: "public",
-  root: './',
+  root: "./",
   build: {
-      outDir: 'dist',
+    outDir: "dist",
   },
-})
+});

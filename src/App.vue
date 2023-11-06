@@ -21,8 +21,8 @@
       donc possible de choisir son rôle !
     </div>
     <div v-else class="ai-bar">
-      Version 0.5 - Ajout de Lyney, Lynette et Freminet - Modes de jeu
-      disponibles
+      Version 0.5 - Ajout des nouveaux personnages & modes de jeu Miroir et
+      Chaos
     </div>
     <div class="home section">
       <div class="help-btn" @click="openHelp">
