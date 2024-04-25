@@ -53,7 +53,7 @@
     <div class="ai-subbox mb-4">
       <div class="ai-subtitle ai-subnegative">Code d'invitation</div>
       <div class="ai-invite-code">
-        <span class="ai-invite-link">https://among-impact.jiveoff.fr/#</span
+        <span class="ai-invite-link">https://among-impact.akenouille.fr/#</span
         ><span class="ai-room-code" :class="{ 'ai-blur': hideCode }">{{
           gameData.roomData.inviteCode
         }}</span>
