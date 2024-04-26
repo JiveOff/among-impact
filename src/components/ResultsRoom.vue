@@ -11,7 +11,9 @@
       <div class="player">
         <div class="avatar">
           <img
-            :src="`/img/avatars/${result.player.profilePicture}.png`"
+            :src="`https://api.ambr.top/assets/UI/${
+              avatars[result.player.avatarId].icon
+            }.png`"
             alt="Profil"
             class="ai-avatar"
           />
@@ -52,12 +54,18 @@
 </style>
 
 <script>
+import { mapState } from "pinia";
+import { useMiscStore } from "../stores/misc";
+
 export default {
   props: ["gameData"],
   mounted() {
     let audio = new Audio("sounds/end.mp3");
     audio.volume = 0.45;
     audio.play();
+  },
+  computed: {
+    ...mapState(useMiscStore, ["avatars"]),
   },
   methods: {
     leaveRoom() {

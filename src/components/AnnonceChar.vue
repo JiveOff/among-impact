@@ -11,18 +11,12 @@
             <div class="ai-subtitle mt-0">Ton personnage</div>
             <div class="avatar">
               <img
-                :src="`/img/avatars/${info.profilePicture}.png`"
+                :src="`https://api.ambr.top/assets/UI/${
+                  avatars[info.avatarId].icon
+                }.png`"
                 :alt="avatar"
               /><span class="name">
-                {{
-                  info.profilePicture
-                    .replace("_", " ")
-                    .split(" ")
-                    .map((word) => {
-                      return word[0].toUpperCase() + word.substring(1);
-                    })
-                    .join(" ")
-                }}
+                {{ avatars[info.avatarId].name }}
               </span>
             </div>
           </div>
@@ -94,8 +88,10 @@
 </style>
 
 <script>
+import { mapState } from "pinia";
 import Box from "./Box.vue";
 import Role from "./Role.vue";
+import { useMiscStore } from "../stores/misc";
 
 export default {
   components: {
@@ -107,6 +103,9 @@ export default {
     return {
       transitionRole: true,
     };
+  },
+  computed: {
+    ...mapState(useMiscStore, ["avatars"]),
   },
   mounted() {
     let audio = new Audio("sounds/start.mp3");

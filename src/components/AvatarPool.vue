@@ -23,12 +23,15 @@
           class="avatar-box"
           v-for="avatar in avatars"
           :key="avatar.id"
-          :class="{ 'avatar-flou': !avatarPool.includes(avatar) }"
-          @click="togglePool(avatar)"
+          :class="{ 'avatar-flou': !avatarPool.includes(avatar.id) }"
+          @click="togglePool(avatar.id)"
         >
-          <img :src="`/img/avatars/${avatar}.png`" :alt="avatar" />
+          <img
+            :src="`https://api.ambr.top/assets/UI/${avatar.icon}.png`"
+            :alt="avatar.name"
+          />
           <div class="avatar-name">
-            {{ humanizeName(avatar) }}
+            {{ avatar.name }}
           </div>
         </div>
       </div>
@@ -103,6 +106,7 @@
 
 <script>
 import Box from "./Box.vue";
+
 export default {
   components: {
     Box,
@@ -115,12 +119,6 @@ export default {
         : this.avatarPool.push(avatar);
       localStorage.setItem("avatarPool", this.avatarPool.join(","));
       this.$emit("avatarPoolChanged");
-    },
-    humanizeName(name) {
-      return name
-        .split("_")
-        .map((word) => word[0].toUpperCase() + word.slice(1))
-        .join(" ");
     },
   },
 };

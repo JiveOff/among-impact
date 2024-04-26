@@ -19,8 +19,10 @@
         >
           <div class="avatar">
             <img
-              :src="`/img/avatars/${player.profilePicture}.png`"
-              :key="player.profilePicture"
+              :src="`https://api.ambr.top/assets/UI/${
+                avatars[player.avatarId].icon
+              }.png`"
+              :key="player.avatarId"
               alt="Profil"
               class="ai-avatar"
             />
@@ -29,7 +31,7 @@
               :src="`${
                 playerVotes.filter((p) => p.player === player.id)[0].role.image
               }`"
-              :key="player.profilePicture"
+              :key="player.avatarId"
               class="ai-avatar-vote"
               alt="Profil"
             />
@@ -125,7 +127,9 @@
 </style>
 
 <script>
+import { mapState } from "pinia";
 import VoteVue from "./Vote.vue";
+import { useMiscStore } from "../stores/misc";
 export default {
   props: ["gameData", "roles"],
   components: {},
@@ -153,6 +157,7 @@ export default {
     timerFormatted: function () {
       return this.timer % 60 < 10 ? "0" + (this.timer % 60) : this.timer % 60;
     },
+    ...mapState(useMiscStore, ["avatars"]),
   },
   methods: {
     endVoting() {

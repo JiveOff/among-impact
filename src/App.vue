@@ -21,8 +21,7 @@
       donc possible de choisir son rôle !
     </div>
     <div v-else class="ai-bar">
-      Version 0.5 - Ajout des nouveaux personnages & modes de jeu Miroir et
-      Chaos
+      Version 0.6 - Mise à jour automatique des personnages
     </div>
     <div class="home section">
       <div class="help-btn" @click="openHelp">
@@ -223,6 +222,7 @@ export default {
     },
     setAvatars: function (avatars) {
       this.avatars = avatars;
+      useMiscStore().setAvatars(avatars);
     },
     gameData: function ({ state, data }) {
       this.gameData.state = state;

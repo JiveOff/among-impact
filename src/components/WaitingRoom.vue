@@ -21,8 +21,10 @@
           <div class="avatar">
             <transition name="fade" mode="out-in">
               <img
-                :src="`/img/avatars/${player.profilePicture}.png`"
-                :key="player.profilePicture"
+                :src="`https://api.ambr.top/assets/UI/${
+                  avatars[player.avatarId].icon
+                }.png`"
+                :key="player.avatarId"
                 alt="Profil"
               />
             </transition>
@@ -170,7 +172,9 @@ export default {
     if (pool.length > 0) this.avatarPool = pool.split(",");
 
     this.avatarPool = this.avatarPool.filter((avatar) =>
-      this.avatars.includes(avatar)
+      Object.keys(this.avatars)
+        .map((avatar) => avatar.id)
+        .includes(avatar)
     );
 
     this.$emit("avatarPoolChanged", { pool: this.avatarPool });

@@ -16,12 +16,17 @@
         >
           <div class="avatar">
             <img
-              :src="`/img/avatars/${player.profilePicture}.png`"
-              :key="player.profilePicture"
+              :src="`https://api.ambr.top/assets/UI/${
+                avatars[player.avatarId].icon
+              }.png`"
+              :key="player.avatarId"
               alt="Profil"
             />
           </div>
-          <span class="player-name">{{ player.name }}</span>
+          <div>
+            <span class="player-name">{{ player.name }}</span>
+            <span class="player-role">{{ avatars[player.avatarId].name }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -80,6 +85,13 @@
 .player .player-name {
   font-family: "Amatic SC", cursive;
   font-size: 2rem;
+  line-height: 1rem;
+}
+
+.player .player-role {
+  display: block;
+  font-size: 0.8rem;
+  line-height: 1rem;
 }
 
 .player img {
@@ -89,8 +101,10 @@
 </style>
 
 <script>
+import { mapState } from "pinia";
 import AnnonceCharVue from "./AnnonceChar.vue";
 import Role from "./Role.vue";
+import { useMiscStore } from "../stores/misc";
 export default {
   props: ["gameData"],
   components: {
@@ -98,6 +112,9 @@ export default {
   },
   data() {
     return {};
+  },
+  computed: {
+    ...mapState(useMiscStore, ["avatars"]),
   },
   mounted() {
     this.$buefy.modal.open({
