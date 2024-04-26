@@ -85,7 +85,6 @@
 .player .player-name {
   font-family: "Amatic SC", cursive;
   font-size: 2rem;
-  line-height: 1rem;
 }
 
 .player .player-role {

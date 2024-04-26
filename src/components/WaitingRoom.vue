@@ -172,9 +172,7 @@ export default {
     if (pool.length > 0) this.avatarPool = pool.split(",");
 
     this.avatarPool = this.avatarPool.filter((avatar) =>
-      Object.keys(this.avatars)
-        .map((avatar) => avatar.id)
-        .includes(avatar)
+      Object.keys(this.avatars).includes(avatar)
     );
 
     this.$emit("avatarPoolChanged", { pool: this.avatarPool });
