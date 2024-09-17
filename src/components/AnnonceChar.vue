@@ -11,7 +11,7 @@
             <div class="ai-subtitle mt-0">Ton personnage</div>
             <div class="avatar">
               <img
-                :src="`https://api.ambr.top/assets/UI/${
+                :src="`https://gi.yatta.top/assets/UI/${
                   avatars[info.avatarId].icon
                 }.png`"
                 :alt="avatar"

@@ -491,6 +491,8 @@ input:focus ~ .bar:after {
 
   display: flex;
   align-items: center;
+
+  z-index: 100;
 }
 
 .help-btn .icon {

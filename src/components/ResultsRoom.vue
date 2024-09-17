@@ -11,7 +11,7 @@
       <div class="player">
         <div class="avatar">
           <img
-            :src="`https://api.ambr.top/assets/UI/${
+            :src="`https://gi.yatta.top/assets/UI/${
               avatars[result.player.avatarId].icon
             }.png`"
             alt="Profil"

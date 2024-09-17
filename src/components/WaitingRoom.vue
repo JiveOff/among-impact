@@ -21,7 +21,7 @@
           <div class="avatar">
             <transition name="fade" mode="out-in">
               <img
-                :src="`https://api.ambr.top/assets/UI/${
+                :src="`https://gi.yatta.top/assets/UI/${
                   avatars[player.avatarId].icon
                 }.png`"
                 :key="player.avatarId"

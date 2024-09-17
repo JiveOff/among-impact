@@ -27,7 +27,7 @@
           @click="togglePool(avatar.id)"
         >
           <img
-            :src="`https://api.ambr.top/assets/UI/${avatar.icon}.png`"
+            :src="`https://gi.yatta.top/assets/UI/${avatar.icon}.png`"
             :alt="avatar.name"
           />
           <div class="avatar-name">
